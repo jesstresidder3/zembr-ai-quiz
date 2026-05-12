@@ -9,28 +9,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #F7F8FA;
+      --bg-start: #EEF6F7;
+      --bg-end: #FFF6F1;
       --card: #FFFFFF;
       --primary: #1B2D3E;
       --accent: #2E7D8C;
-      --accent-soft: #E8F4F6;
+      --accent-light: #3A9BAD;
+      --accent-soft: #E0F2F5;
       --accent-hover: #236A77;
-      --warm: #E8916F;
-      --warm-soft: #FFF0EB;
+      --warm: #E0916F;
+      --warm-dark: #C87A5A;
+      --warm-soft: #FCEEE7;
+      --pop: #EFC94C;
+      --pop-soft: #FDF5DC;
       --text: #1A1A1A;
       --text-mid: #5A6472;
       --text-light: #8E95A2;
       --border: #E2E5EA;
       --success: #2E8C6E;
       --success-soft: #E6F5EF;
-      --radius: 14px;
+      --radius: 16px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      background: var(--bg);
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -43,7 +48,7 @@
 
     .container {
       width: 100%;
-      max-width: 560px;
+      max-width: 580px;
       position: relative;
     }
 
@@ -63,17 +68,25 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 10px;
+      background: var(--accent-soft);
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
     }
 
     .header h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--primary);
       letter-spacing: -0.03em;
       line-height: 1.15;
       margin-bottom: 14px;
+    }
+
+    .header h1 span {
+      color: var(--accent);
     }
 
     .header p {
@@ -85,35 +98,48 @@
     }
 
     .header .time-badge {
-      display: inline-block;
-      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-soft);
-      padding: 6px 14px;
+      color: var(--warm-dark);
+      background: var(--warm-soft);
+      padding: 6px 16px;
       border-radius: 100px;
     }
 
+    .time-badge svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--warm-dark);
+      fill: none;
+      stroke-width: 2;
+    }
+
     /* Progress */
-    .progress-bar {
-      width: 100%;
-      height: 3px;
-      background: var(--border);
-      border-radius: 3px;
-      margin-bottom: 28px;
-      overflow: hidden;
+    .progress-wrap {
+      margin-bottom: 24px;
       opacity: 0;
       animation: fadeUp 0.6s ease 0.15s forwards;
     }
 
+    .progress-bar {
+      width: 100%;
+      height: 5px;
+      background: rgba(0,0,0,0.06);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
     .progress-fill {
       height: 100%;
-      background: var(--accent);
-      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+      border-radius: 5px;
       width: 0%;
       transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -122,17 +148,16 @@
     .card {
       background: var(--card);
       border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
       border-radius: var(--radius);
-      padding: 36px 32px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 6px 24px rgba(0,0,0,0.03);
+      padding: 40px 36px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.04);
       opacity: 0;
       animation: fadeUp 0.6s ease 0.25s forwards;
     }
 
     /* Steps */
-    .step {
-      display: none;
-    }
+    .step { display: none; }
 
     .step.active {
       display: block;
@@ -148,23 +173,36 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
     .step-number {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 8px;
+      color: var(--accent);
     }
 
     .step h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--primary);
       letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       line-height: 1.3;
     }
 
@@ -178,9 +216,9 @@
     .option {
       display: flex;
       align-items: center;
-      padding: 14px 18px;
+      padding: 15px 18px;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
       user-select: none;
@@ -194,39 +232,43 @@
     .option.selected {
       border-color: var(--accent);
       background: var(--accent-soft);
+      box-shadow: 0 0 0 1px var(--accent);
     }
 
     .option input { display: none; }
 
     .option-radio {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border: 2px solid var(--border);
       border-radius: 50%;
       margin-right: 14px;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
       transition: all 0.2s ease;
     }
 
     .option.selected .option-radio {
       border-color: var(--accent);
+      background: var(--accent);
     }
 
     .option.selected .option-radio::after {
       content: '';
-      width: 10px;
-      height: 10px;
-      background: var(--accent);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: white;
       border-radius: 50%;
-      animation: popIn 0.2s ease;
+      transform: translate(-50%, -50%);
+      animation: popIn 0.15s ease;
     }
 
     @keyframes popIn {
-      from { transform: scale(0); }
-      to { transform: scale(1); }
+      from { transform: translate(-50%, -50%) scale(0); }
+      to { transform: translate(-50%, -50%) scale(1); }
     }
 
     .option-text {
@@ -245,9 +287,9 @@
     .checkbox-option {
       display: flex;
       align-items: center;
-      padding: 12px 16px;
+      padding: 13px 16px;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
       user-select: none;
@@ -261,20 +303,19 @@
     .checkbox-option.selected {
       border-color: var(--accent);
       background: var(--accent-soft);
+      box-shadow: 0 0 0 1px var(--accent);
     }
 
     .checkbox-option input { display: none; }
 
     .checkbox-box {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border: 2px solid var(--border);
-      border-radius: 5px;
+      border-radius: 6px;
       margin-right: 10px;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
       transition: all 0.2s ease;
     }
 
@@ -283,20 +324,83 @@
       background: var(--accent);
     }
 
-    .checkbox-option.selected .checkbox-box::after {
-      content: '';
-      width: 10px;
-      height: 8px;
-      border-left: 2px solid white;
-      border-bottom: 2px solid white;
-      transform: rotate(-45deg) translateY(-1px);
-      animation: popIn 0.2s ease;
+    .checkbox-option.selected .checkbox-box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .checkbox-box svg {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.15s ease;
     }
 
     .checkbox-text {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text);
       font-weight: 500;
+    }
+
+    /* Feeling chips */
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-mid);
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .chip.selected {
+      color: white;
+      box-shadow: 0 2px 8px rgba(46,125,140,0.25);
+    }
+
+    .chip input { display: none; }
+
+    .chip[data-colour="teal"].selected {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .chip[data-colour="warm"].selected {
+      background: var(--warm);
+      border-color: var(--warm);
+    }
+    .chip[data-colour="pop"].selected {
+      background: #D4A832;
+      border-color: #D4A832;
+    }
+    .chip[data-colour="blue"].selected {
+      background: #4A8AB5;
+      border-color: #4A8AB5;
+    }
+    .chip[data-colour="muted"].selected {
+      background: #7BA89C;
+      border-color: #7BA89C;
     }
 
     /* Text inputs */
@@ -305,12 +409,12 @@
     }
 
     .textarea-wrap + .textarea-wrap {
-      margin-top: 20px;
+      margin-top: 22px;
     }
 
     .field-label {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 8px;
@@ -322,17 +426,18 @@
       width: 100%;
       padding: 14px 16px;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.95rem;
       color: var(--text);
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
       line-height: 1.6;
+      background: #FAFBFC;
     }
 
     .textarea-wrap textarea {
-      min-height: 88px;
+      min-height: 80px;
       resize: vertical;
     }
 
@@ -344,6 +449,8 @@
     .textarea-wrap textarea:focus,
     .textarea-wrap input:focus {
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(46,125,140,0.1);
+      background: white;
     }
 
     .textarea-hint {
@@ -351,7 +458,6 @@
       color: var(--text-light);
       margin-top: 8px;
       line-height: 1.5;
-      font-style: italic;
     }
 
     .optional-tag {
@@ -359,6 +465,12 @@
       color: var(--text-light);
       font-size: 0.78rem;
       margin-left: 6px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 22px 0;
     }
 
     /* Buttons */
@@ -374,7 +486,7 @@
       font-size: 0.88rem;
       font-weight: 600;
       padding: 12px 28px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -389,7 +501,7 @@
     .btn-primary:hover {
       background: #253d50;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(27,45,62,0.2);
+      box-shadow: 0 4px 16px rgba(27,45,62,0.2);
     }
 
     .btn-primary:disabled {
@@ -411,17 +523,17 @@
     }
 
     .btn-submit {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
       color: white;
       width: 100%;
-      padding: 14px;
+      padding: 15px;
       font-size: 0.95rem;
+      border-radius: 12px;
     }
 
     .btn-submit:hover {
-      background: var(--accent-hover);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(46,125,140,0.25);
+      box-shadow: 0 6px 20px rgba(46,125,140,0.3);
     }
 
     .btn-submit:disabled {
@@ -445,20 +557,25 @@
     }
 
     .check-circle {
-      width: 64px;
-      height: 64px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      background: var(--success-soft);
+      background: linear-gradient(135deg, var(--success-soft) 0%, #D4F0E3 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
-      animation: popIn 0.4s ease 0.2s both;
+      margin: 0 auto 22px;
+      animation: scaleIn 0.4s ease 0.2s both;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
     }
 
     .check-circle svg {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       stroke: var(--success);
       stroke-width: 2.5;
       fill: none;
@@ -476,7 +593,7 @@
 
     .thank-you h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: var(--primary);
       letter-spacing: -0.02em;
@@ -487,6 +604,8 @@
       font-size: 0.95rem;
       color: var(--text-mid);
       line-height: 1.65;
+      max-width: 380px;
+      margin: 0 auto;
     }
 
     /* Footer */
@@ -500,14 +619,28 @@
     .footer p {
       font-size: 0.78rem;
       color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .footer svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--text-light);
+      fill: none;
+      stroke-width: 2;
     }
 
     /* Responsive */
     @media (max-width: 480px) {
       body { padding: 16px; }
       .card { padding: 28px 22px; }
-      .header h1 { font-size: 1.55rem; }
+      .header h1 { font-size: 1.6rem; }
       .checkbox-grid { grid-template-columns: 1fr; }
+      .chip-grid { gap: 8px; }
+      .chip { padding: 9px 16px; font-size: 0.85rem; }
       .btn-row { flex-direction: column-reverse; gap: 8px; }
       .btn { width: 100%; text-align: center; }
     }
@@ -534,20 +667,28 @@
   <div class="container">
     <div class="header">
       <div class="header-label">Zembr AI Questionnaire</div>
-      <h1>AI Readiness Check</h1>
+      <h1>AI Readiness <span>Check</span></h1>
       <p>As part of Zembr's ongoing strategy, we're encouraging the team to explore and build AI skills. This is a quick, anonymous check-in to see what tools you're using, what could be improved, and how you're feeling about AI.</p>
-      <span class="time-badge">Takes less than 2 minutes</span>
+      <span class="time-badge">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Takes less than 2 minutes
+      </span>
     </div>
 
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
     </div>
 
     <div class="card">
 
       <!-- Step 1: AI Usage -->
       <div class="step active" id="step1">
-        <div class="step-number" id="step1Label">Question 1</div>
+        <div class="step-indicator">
+          <div class="step-dot"></div>
+          <div class="step-number" id="step1Label">Question 1</div>
+        </div>
         <h2>Are you currently using AI?</h2>
         <div class="options" id="usageOptions">
           <label class="option" data-value="none">
@@ -572,41 +713,54 @@
         </div>
       </div>
 
-      <!-- Step 2: Tools (conditional) -->
+      <!-- Step 2: Tools + what for (conditional) -->
       <div class="step" id="step2">
-        <div class="step-number" id="step2Label">Question 2</div>
+        <div class="step-indicator">
+          <div class="step-dot"></div>
+          <div class="step-number" id="step2Label">Question 2</div>
+        </div>
         <h2>Which tools have you tried?</h2>
         <div class="checkbox-grid" id="toolsGrid">
           <label class="checkbox-option" data-value="ChatGPT">
             <input type="checkbox" value="ChatGPT">
-            <div class="checkbox-box"></div>
+            <div class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
             <span class="checkbox-text">ChatGPT</span>
           </label>
           <label class="checkbox-option" data-value="Claude">
             <input type="checkbox" value="Claude">
-            <div class="checkbox-box"></div>
+            <div class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
             <span class="checkbox-text">Claude</span>
+          </label>
+          <label class="checkbox-option" data-value="Claude Code">
+            <input type="checkbox" value="Claude Code">
+            <div class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+            <span class="checkbox-text">Claude Code</span>
           </label>
           <label class="checkbox-option" data-value="Copilot">
             <input type="checkbox" value="Copilot">
-            <div class="checkbox-box"></div>
+            <div class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
             <span class="checkbox-text">Copilot</span>
           </label>
           <label class="checkbox-option" data-value="Gemini">
             <input type="checkbox" value="Gemini">
-            <div class="checkbox-box"></div>
+            <div class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
             <span class="checkbox-text">Gemini</span>
           </label>
           <label class="checkbox-option" data-value="Grammarly">
             <input type="checkbox" value="Grammarly">
-            <div class="checkbox-box"></div>
+            <div class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
             <span class="checkbox-text">Grammarly</span>
           </label>
           <label class="checkbox-option" data-value="Other">
             <input type="checkbox" value="Other">
-            <div class="checkbox-box"></div>
+            <div class="checkbox-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
             <span class="checkbox-text">Other</span>
           </label>
+        </div>
+        <div class="section-divider"></div>
+        <div class="textarea-wrap">
+          <label class="field-label">What do you currently use AI for?<span class="optional-tag">optional</span></label>
+          <input type="text" id="aiUsedFor" placeholder="e.g. Writing emails, summarising documents, brainstorming...">
         </div>
         <div class="btn-row">
           <button class="btn btn-back" id="back2">Back</button>
@@ -616,7 +770,10 @@
 
       <!-- Step 3: Pain points + automation -->
       <div class="step" id="step3">
-        <div class="step-number" id="step3Label">Question 3</div>
+        <div class="step-indicator">
+          <div class="step-dot"></div>
+          <div class="step-number" id="step3Label">Question 3</div>
+        </div>
         <h2>Your day-to-day</h2>
         <div class="textarea-wrap">
           <label class="field-label">What's the most painful or time-consuming part of your role?</label>
@@ -632,13 +789,47 @@
         </div>
       </div>
 
-      <!-- Step 4: Feelings -->
+      <!-- Step 4: Feelings (chips) -->
       <div class="step" id="step4">
-        <div class="step-number" id="step4Label">Last question</div>
-        <h2>How are you feeling about AI overall?</h2>
-        <div class="textarea-wrap">
-          <textarea id="feelings" placeholder="A couple of words is all we need..."></textarea>
-          <p class="textarea-hint">There's no wrong answer. Overwhelmed, curious, excited, sceptical, "I don't know much about it"... whatever comes to mind.</p>
+        <div class="step-indicator">
+          <div class="step-dot"></div>
+          <div class="step-number" id="step4Label">Last question</div>
+        </div>
+        <h2>How are you feeling about AI?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-light); margin-bottom: 18px;">Pick as many as apply. There's no wrong answer.</p>
+        <div class="chip-grid" id="feelingsGrid">
+          <label class="chip" data-value="Excited" data-colour="teal">
+            <input type="checkbox" value="Excited">
+            Excited
+          </label>
+          <label class="chip" data-value="Curious" data-colour="blue">
+            <input type="checkbox" value="Curious">
+            Curious
+          </label>
+          <label class="chip" data-value="Overwhelmed" data-colour="warm">
+            <input type="checkbox" value="Overwhelmed">
+            Overwhelmed
+          </label>
+          <label class="chip" data-value="Sceptical" data-colour="pop">
+            <input type="checkbox" value="Sceptical">
+            Sceptical
+          </label>
+          <label class="chip" data-value="I don't know much about it" data-colour="muted">
+            <input type="checkbox" value="I don't know much about it">
+            I don't know much about it
+          </label>
+          <label class="chip" data-value="Already using it daily" data-colour="teal">
+            <input type="checkbox" value="Already using it daily">
+            Already using it daily
+          </label>
+          <label class="chip" data-value="Nervous" data-colour="warm">
+            <input type="checkbox" value="Nervous">
+            Nervous
+          </label>
+          <label class="chip" data-value="Open to learning" data-colour="blue">
+            <input type="checkbox" value="Open to learning">
+            Open to learning
+          </label>
         </div>
         <div class="btn-row">
           <button class="btn btn-back" id="back4">Back</button>
@@ -658,33 +849,34 @@
     </div>
 
     <div class="footer">
-      <p>Anonymous. Your responses are not linked to your name.</p>
+      <p>
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Anonymous. Your responses are not linked to your name.
+      </p>
     </div>
   </div>
 
   <script>
-    // ─── Backend URL ──────────────────────────────────────────
-    // Paste your deployed Google Apps Script web app URL here:
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGyOYYMCEs0134PBVaq8kexIpU82zL8QUBm-12_XqXpZslyVvSbgnq6Zfk_QlWSx2G/exec';
-    // ──────────────────────────────────────────────────────────
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGyOYYMCEs0134PBVaq8kexIpU82zL8QUBm-12_XqXpZslyVvSbgnq6Zfk_QlWSx2G/exec';
 
-    const state = {
+    var state = {
       usage: null,
       tools: [],
+      aiUsedFor: '',
       painPoint: '',
       automation: '',
-      feelings: '',
+      feelings: [],
       currentStep: 1
     };
 
-    const steps = {
+    var stepEls = {
       1: document.getElementById('step1'),
       2: document.getElementById('step2'),
       3: document.getElementById('step3'),
       4: document.getElementById('step4')
     };
-    const progressFill = document.getElementById('progressFill');
-    const thankYou = document.getElementById('thankYou');
+    var progressFill = document.getElementById('progressFill');
+    var thankYou = document.getElementById('thankYou');
 
     function shouldShowTools() {
       return state.usage === 'a_little' || state.usage === 'avid';
@@ -695,129 +887,160 @@
     }
 
     function updateLabels() {
-      const seq = getStepSequence();
-      const total = seq.length;
-      seq.forEach((stepNum, idx) => {
-        const label = document.getElementById('step' + stepNum + 'Label');
+      var seq = getStepSequence();
+      var total = seq.length;
+      for (var i = 0; i < seq.length; i++) {
+        var label = document.getElementById('step' + seq[i] + 'Label');
         if (label) {
-          if (idx === total - 1) {
-            label.textContent = 'Last question';
-          } else {
-            label.textContent = 'Question ' + (idx + 1) + ' of ' + total;
-          }
+          label.textContent = (i === total - 1) ? 'Last question' : 'Question ' + (i + 1) + ' of ' + total;
         }
-      });
+      }
     }
 
     function updateProgress() {
-      const seq = getStepSequence();
-      const idx = seq.indexOf(state.currentStep);
-      const pct = ((idx + 1) / seq.length) * 100;
+      var seq = getStepSequence();
+      var idx = seq.indexOf(state.currentStep);
+      var pct = ((idx + 1) / seq.length) * 100;
       progressFill.style.width = pct + '%';
       updateLabels();
     }
 
     function showStep(num) {
-      Object.values(steps).forEach(s => s.classList.remove('active'));
+      for (var k in stepEls) { stepEls[k].classList.remove('active'); }
       thankYou.classList.remove('active');
-      steps[num].classList.add('active');
+      stepEls[num].classList.add('active');
       state.currentStep = num;
       updateProgress();
     }
 
     function nextStep() {
-      const seq = getStepSequence();
-      const idx = seq.indexOf(state.currentStep);
+      var seq = getStepSequence();
+      var idx = seq.indexOf(state.currentStep);
       if (idx < seq.length - 1) showStep(seq[idx + 1]);
     }
 
     function prevStep() {
-      const seq = getStepSequence();
-      const idx = seq.indexOf(state.currentStep);
+      var seq = getStepSequence();
+      var idx = seq.indexOf(state.currentStep);
       if (idx > 0) showStep(seq[idx - 1]);
     }
 
-    // Step 1: Usage
-    document.querySelectorAll('#usageOptions .option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        document.querySelectorAll('#usageOptions .option').forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        opt.querySelector('input').checked = true;
-        state.usage = opt.dataset.value;
-        document.getElementById('btn1').disabled = false;
-      });
-    });
+    // Step 1: Usage radios
+    var usageOpts = document.querySelectorAll('#usageOptions .option');
+    for (var i = 0; i < usageOpts.length; i++) {
+      (function(opt) {
+        opt.addEventListener('click', function() {
+          for (var j = 0; j < usageOpts.length; j++) { usageOpts[j].classList.remove('selected'); }
+          opt.classList.add('selected');
+          opt.querySelector('input').checked = true;
+          state.usage = opt.getAttribute('data-value');
+          document.getElementById('btn1').disabled = false;
+        });
+      })(usageOpts[i]);
+    }
 
-    document.getElementById('btn1').addEventListener('click', nextStep);
+    document.getElementById('btn1').addEventListener('click', function() { nextStep(); });
 
-    // Step 2: Tools
-    document.querySelectorAll('#toolsGrid .checkbox-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        opt.classList.toggle('selected');
-        const val = opt.dataset.value;
-        if (opt.classList.contains('selected')) {
-          if (!state.tools.includes(val)) state.tools.push(val);
-        } else {
-          state.tools = state.tools.filter(t => t !== val);
-        }
-      });
-    });
+    // Step 2: Tools checkboxes
+    var toolOpts = document.querySelectorAll('#toolsGrid .checkbox-option');
+    for (var i = 0; i < toolOpts.length; i++) {
+      (function(opt) {
+        opt.addEventListener('click', function(e) {
+          e.preventDefault();
+          opt.classList.toggle('selected');
+          var val = opt.getAttribute('data-value');
+          var cb = opt.querySelector('input');
+          if (opt.classList.contains('selected')) {
+            cb.checked = true;
+            if (state.tools.indexOf(val) === -1) state.tools.push(val);
+          } else {
+            cb.checked = false;
+            state.tools = state.tools.filter(function(t) { return t !== val; });
+          }
+        });
+      })(toolOpts[i]);
+    }
 
-    document.getElementById('btn2').addEventListener('click', nextStep);
-    document.getElementById('back2').addEventListener('click', prevStep);
+    document.getElementById('btn2').addEventListener('click', function() { nextStep(); });
+    document.getElementById('back2').addEventListener('click', function() { prevStep(); });
 
     // Step 3: Pain + automation
-    document.getElementById('btn3').addEventListener('click', nextStep);
-    document.getElementById('back3').addEventListener('click', prevStep);
+    document.getElementById('btn3').addEventListener('click', function() { nextStep(); });
+    document.getElementById('back3').addEventListener('click', function() { prevStep(); });
 
-    // Step 4: Feelings
-    document.getElementById('back4').addEventListener('click', prevStep);
+    // Step 4: Feeling chips
+    var chips = document.querySelectorAll('#feelingsGrid .chip');
+    for (var i = 0; i < chips.length; i++) {
+      (function(chip) {
+        chip.addEventListener('click', function(e) {
+          e.preventDefault();
+          chip.classList.toggle('selected');
+          var val = chip.getAttribute('data-value');
+          var cb = chip.querySelector('input');
+          if (chip.classList.contains('selected')) {
+            cb.checked = true;
+            if (state.feelings.indexOf(val) === -1) state.feelings.push(val);
+          } else {
+            cb.checked = false;
+            state.feelings = state.feelings.filter(function(f) { return f !== val; });
+          }
+        });
+      })(chips[i]);
+    }
+
+    document.getElementById('back4').addEventListener('click', function() { prevStep(); });
 
     // Submit
-    document.getElementById('btnSubmit').addEventListener('click', async () => {
-      const btn = document.getElementById('btnSubmit');
+    document.getElementById('btnSubmit').addEventListener('click', function() {
+      var btn = document.getElementById('btnSubmit');
+      var aiUsedForEl = document.getElementById('aiUsedFor');
+      state.aiUsedFor = aiUsedForEl ? aiUsedForEl.value.trim() : '';
       state.painPoint = document.getElementById('painPoint').value.trim();
       state.automation = document.getElementById('automation').value.trim();
-      state.feelings = document.getElementById('feelings').value.trim();
 
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span>Submitting...';
 
-      const usageLabels = {
+      var usageLabels = {
         'none': "No, I haven't used any tools",
         'a_little': 'A little bit',
         'avid': "I'm an avid AI user"
       };
 
-      const payload = {
+      var payload = {
         timestamp: new Date().toISOString(),
         usage: usageLabels[state.usage] || state.usage,
         tools: state.tools.length > 0 ? state.tools.join(', ') : 'N/A',
+        aiUsedFor: state.aiUsedFor || 'No response',
         painPoint: state.painPoint || 'No response',
         automation: state.automation || 'No response',
-        feelings: state.feelings || 'No response'
+        feelings: state.feelings.length > 0 ? state.feelings.join(', ') : 'No response'
       };
 
-      if (SCRIPT_URL && SCRIPT_URL !== 'APPS_SCRIPT_URL') {
-        try {
-          await fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-        } catch (e) {
+      if (SCRIPT_URL) {
+        fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function() {
+          showThankYou();
+        }).catch(function(e) {
           console.log('Submission note:', e);
-        }
+          showThankYou();
+        });
       } else {
-        console.log('Survey response (no backend configured):', payload);
+        showThankYou();
       }
 
-      Object.values(steps).forEach(s => s.classList.remove('active'));
-      thankYou.classList.add('active');
-      progressFill.style.width = '100%';
+      function showThankYou() {
+        for (var k in stepEls) { stepEls[k].classList.remove('active'); }
+        thankYou.classList.add('active');
+        progressFill.style.width = '100%';
+      }
     });
 
+    // Init
     updateProgress();
   </script>
 
