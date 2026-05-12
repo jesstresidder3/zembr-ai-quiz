@@ -9,23 +9,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-start: #EEF6F7;
-      --bg-end: #FFF6F1;
+      --bg-start: #FDF5F6;
+      --bg-end: #F8F0F1;
       --card: #FFFFFF;
-      --primary: #1B2D3E;
-      --accent: #2E7D8C;
-      --accent-light: #3A9BAD;
-      --accent-soft: #E0F2F5;
-      --accent-hover: #236A77;
-      --warm: #E0916F;
-      --warm-dark: #C87A5A;
-      --warm-soft: #FCEEE7;
-      --pop: #EFC94C;
-      --pop-soft: #FDF5DC;
+      --primary: #1A1A1A;
+      --accent: #D4284A;
+      --accent-light: #E0335A;
+      --accent-soft: #FDE8EC;
+      --accent-hover: #B8203D;
+      --warm: #D4284A;
+      --warm-dark: #B8203D;
+      --warm-soft: #FDE8EC;
+      --pop: #1A1A1A;
+      --pop-soft: #F0F0F0;
       --text: #1A1A1A;
-      --text-mid: #5A6472;
-      --text-light: #8E95A2;
-      --border: #E2E5EA;
+      --text-mid: #555555;
+      --text-light: #888888;
+      --border: #E5E0E1;
       --success: #2E8C6E;
       --success-soft: #E6F5EF;
       --radius: 16px;
@@ -387,20 +387,20 @@
       border-color: var(--accent);
     }
     .chip[data-colour="warm"].selected {
-      background: var(--warm);
-      border-color: var(--warm);
+      background: #C44D3E;
+      border-color: #C44D3E;
     }
     .chip[data-colour="pop"].selected {
-      background: #D4A832;
-      border-color: #D4A832;
+      background: #1A1A1A;
+      border-color: #1A1A1A;
     }
     .chip[data-colour="blue"].selected {
-      background: #4A8AB5;
-      border-color: #4A8AB5;
+      background: #8C4A6B;
+      border-color: #8C4A6B;
     }
     .chip[data-colour="muted"].selected {
-      background: #7BA89C;
-      border-color: #7BA89C;
+      background: #7A6870;
+      border-color: #7A6870;
     }
 
     /* Text inputs */
@@ -759,7 +759,7 @@
         </div>
         <div class="section-divider"></div>
         <div class="textarea-wrap">
-          <label class="field-label">What do you currently use AI for?<span class="optional-tag">optional</span></label>
+          <label class="field-label">What do you currently use AI for?</label>
           <input type="text" id="aiUsedFor" placeholder="e.g. Writing emails, summarising documents, brainstorming...">
         </div>
         <div class="btn-row">
@@ -780,7 +780,7 @@
           <input type="text" id="painPoint" placeholder="e.g. Formatting reports, chasing invoices, email triage...">
         </div>
         <div class="textarea-wrap">
-          <label class="field-label">What do you think could be automated?<span class="optional-tag">optional</span></label>
+          <label class="field-label">What do you think could be automated?</label>
           <input type="text" id="automation" placeholder="e.g. Data entry, scheduling, writing first drafts...">
         </div>
         <div class="btn-row">
